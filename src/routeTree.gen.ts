@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as NeoImport } from './routes/neo'
 import { Route as DetailsImport } from './routes/$details'
 import { Route as IndexImport } from './routes/index'
+import { Route as PhotoDetailsDateImport } from './routes/photoDetails.$date'
 
 // Create/Update Routes
 
@@ -32,6 +33,12 @@ const DetailsRoute = DetailsImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PhotoDetailsDateRoute = PhotoDetailsDateImport.update({
+  id: '/photoDetails/$date',
+  path: '/photoDetails/$date',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeoImport
       parentRoute: typeof rootRoute
     }
+    '/photoDetails/$date': {
+      id: '/photoDetails/$date'
+      path: '/photoDetails/$date'
+      fullPath: '/photoDetails/$date'
+      preLoaderRoute: typeof PhotoDetailsDateImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,12 +83,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$details': typeof DetailsRoute
   '/neo': typeof NeoRoute
+  '/photoDetails/$date': typeof PhotoDetailsDateRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$details': typeof DetailsRoute
   '/neo': typeof NeoRoute
+  '/photoDetails/$date': typeof PhotoDetailsDateRoute
 }
 
 export interface FileRoutesById {
@@ -82,14 +98,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/$details': typeof DetailsRoute
   '/neo': typeof NeoRoute
+  '/photoDetails/$date': typeof PhotoDetailsDateRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$details' | '/neo'
+  fullPaths: '/' | '/$details' | '/neo' | '/photoDetails/$date'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$details' | '/neo'
-  id: '__root__' | '/' | '/$details' | '/neo'
+  to: '/' | '/$details' | '/neo' | '/photoDetails/$date'
+  id: '__root__' | '/' | '/$details' | '/neo' | '/photoDetails/$date'
   fileRoutesById: FileRoutesById
 }
 
@@ -97,12 +114,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DetailsRoute: typeof DetailsRoute
   NeoRoute: typeof NeoRoute
+  PhotoDetailsDateRoute: typeof PhotoDetailsDateRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DetailsRoute: DetailsRoute,
   NeoRoute: NeoRoute,
+  PhotoDetailsDateRoute: PhotoDetailsDateRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/$details",
-        "/neo"
+        "/neo",
+        "/photoDetails/$date"
       ]
     },
     "/": {
@@ -128,6 +148,9 @@ export const routeTree = rootRoute
     },
     "/neo": {
       "filePath": "neo.tsx"
+    },
+    "/photoDetails/$date": {
+      "filePath": "photoDetails.$date.tsx"
     }
   }
 }

@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 
+const API_KEY = 'MetHYfQ8KJ7rodhMY82Kd320QG7mmer4L8Q5L0xC'
+
 function NasaTable() {
   const { isLoading, error, data } = useQuery({
     queryKey: ['data'],
-    queryFn: fetchData,
+    queryFn: fetchImagesData,
   })
 
   if (isLoading) return <p>Loading...</p>
@@ -27,9 +29,9 @@ function NasaTable() {
             <td className="border px-4 py-2">
 							<div className="relative">
 								<span className="invisible group-hover:visible">
-                  <Link to="/details" className="px-2 hover:bg-gray-200" >
+                  <Link to='/photoDetails/$date' params={{ date: item.date }} className="px-2 hover:bg-gray-200" >
                     Details
-									</Link>
+                  </Link>
 								</span>
 							</div>
             </td>
@@ -40,8 +42,8 @@ function NasaTable() {
   )
 }
 
-async function fetchData() {
-  const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=15')
+async function fetchImagesData() {
+  const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=30`)
   if (!response.ok) {
     throw new Error('Network response was not ok')
   }
