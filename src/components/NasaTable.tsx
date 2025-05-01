@@ -18,7 +18,7 @@ function NasaTable() {
         <tr>
           <th>Date</th>
           <th>Image Title</th>
-          <th className="border px-4 py-2">Action</th>
+          <th className="border px-4">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -26,7 +26,7 @@ function NasaTable() {
           <tr key={item.url}>
             <td>{item.date}</td>
             <td>{item.title}</td>
-            <td className="border px-4 py-2">
+            <td className="border px-4">
 							<div className="relative">
 								<span className="invisible group-hover:visible">
                   <Link to='/photoDetails/$date' params={{ date: item.date }} className="px-2 hover:bg-gray-200" >
