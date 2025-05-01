@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { Link } from '@tanstack/react-router'
 
 function NasaTable() {
   const { isLoading, error, data } = useQuery({
@@ -15,6 +16,7 @@ function NasaTable() {
         <tr>
           <th>Date</th>
           <th>Image Title</th>
+          <th className="border px-4 py-2">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -25,13 +27,9 @@ function NasaTable() {
             <td className="border px-4 py-2">
 							<div className="relative">
 								<span className="invisible group-hover:visible">
-									<a href="/newevent?update={event.id}" aria-label="edit" title="Edit event" className="px-2 hover:bg-gray-200">
-										<i className="fa fa-edit"/>
-									</a>
-                  <button type="button" aria-label="details" title="Details" className="px-2 hover:bg-gray-200" onclick={(e:Event) => showDetails(e)}>
-										<i className="fa fa-trash"/>
+                  <Link to="/details" className="px-2 hover:bg-gray-200" >
                     Details
-									</button>
+									</Link>
 								</span>
 							</div>
             </td>
