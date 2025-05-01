@@ -11,10 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as NeoImport } from './routes/neo'
 import { Route as DetailsImport } from './routes/details'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const NeoRoute = NeoImport.update({
+  id: '/neo',
+  path: '/neo',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DetailsRoute = DetailsImport.update({
   id: '/details',
@@ -46,6 +53,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DetailsImport
       parentRoute: typeof rootRoute
     }
+    '/neo': {
+      id: '/neo'
+      path: '/neo'
+      fullPath: '/neo'
+      preLoaderRoute: typeof NeoImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +68,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/details': typeof DetailsRoute
+  '/neo': typeof NeoRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/details': typeof DetailsRoute
+  '/neo': typeof NeoRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/details': typeof DetailsRoute
+  '/neo': typeof NeoRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/details'
+  fullPaths: '/' | '/details' | '/neo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/details'
-  id: '__root__' | '/' | '/details'
+  to: '/' | '/details' | '/neo'
+  id: '__root__' | '/' | '/details' | '/neo'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DetailsRoute: typeof DetailsRoute
+  NeoRoute: typeof NeoRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DetailsRoute: DetailsRoute,
+  NeoRoute: NeoRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +116,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/details"
+        "/details",
+        "/neo"
       ]
     },
     "/": {
@@ -105,6 +125,9 @@ export const routeTree = rootRoute
     },
     "/details": {
       "filePath": "details.tsx"
+    },
+    "/neo": {
+      "filePath": "neo.tsx"
     }
   }
 }
