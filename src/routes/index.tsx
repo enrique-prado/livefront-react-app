@@ -1,6 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import '../App.css'
+
+const queryClient = new QueryClient()
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -8,29 +10,47 @@ export const Route = createFileRoute('/')({
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <a
-          className="App-link"
-          href="https://tanstack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn TanStack
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <DataTable />
+      </div>
+    </QueryClientProvider>
   )
+}
+
+function DataTable() {
+  const { isPending, error, data } = useQuery({
+    queryKey: ['data'], 
+    queryFn:fetchData
+  })
+
+  if (isPending) return <p>Loading...</p>
+  if (error) return <p>Error: {error.message}</p>
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Image Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item: { date: string; title: string; url: string }) => (
+          <tr key={item.url}>
+            <td>{item.date}</td>
+            <td>{item.title}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+
+async function fetchData() {
+  const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=15')
+  if (!response.ok) {
+    throw new Error('Network response was not ok')
+  }
+  return response.json()
 }
