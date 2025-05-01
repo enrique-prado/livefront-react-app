@@ -22,6 +22,19 @@ function NasaTable() {
           <tr key={item.url}>
             <td>{item.date}</td>
             <td>{item.title}</td>
+            <td className="border px-4 py-2">
+							<div className="relative">
+								<span className="invisible group-hover:visible">
+									<a href="/newevent?update={event.id}" aria-label="edit" title="Edit event" className="px-2 hover:bg-gray-200">
+										<i className="fa fa-edit"/>
+									</a>
+                  <button type="button" aria-label="details" title="Details" className="px-2 hover:bg-gray-200" onclick={(e:Event) => showDetails(e)}>
+										<i className="fa fa-trash"/>
+                    Details
+									</button>
+								</span>
+							</div>
+            </td>
           </tr>
         ))}
       </tbody>
