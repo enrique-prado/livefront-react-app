@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { API_KEY } from "../types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage, faVideo } from "@fortawesome/free-solid-svg-icons";
 
 function NasaTable() {
 	const { isLoading, error, data } = useQuery({
@@ -54,7 +56,16 @@ function NasaTable() {
 									</span>
 								</div>
 							</td>
-							<td className="border px-4 py-2">{item.media_type}</td>
+							<td className="border px-4 py-2">
+								<div className="flex-center">
+									<span title={item.media_type === "video" ? "Video" : "Image"}>
+										<FontAwesomeIcon
+											size="2x"
+											icon={item.media_type === "video" ? faVideo : faImage}
+										/>
+									</span>
+								</div>
+							</td>
 						</tr>
 					),
 				)}

@@ -5,8 +5,7 @@ import { API_KEY } from "../types";
 
 
 async function fetchImageDetails(date: string) {
-  console.log('fetchImageDetails', date)
-  // Validate the date format
+  // Validate date format is YYYY-MM-DD
   const datePattern = /^\d{4}-\d{2}-\d{2}$/;
   if (!datePattern.test(date)) {
     throw new Error('Invalid date format. Expected format: YYYY-MM-DD')

@@ -11,15 +11,15 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as TileViewImport } from './routes/tileView'
+import { Route as CreditsImport } from './routes/credits'
 import { Route as IndexImport } from './routes/index'
 import { Route as PhotoDetailsDateImport } from './routes/photoDetails.$date'
 
 // Create/Update Routes
 
-const TileViewRoute = TileViewImport.update({
-  id: '/tileView',
-  path: '/tileView',
+const CreditsRoute = CreditsImport.update({
+  id: '/credits',
+  path: '/credits',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,11 +46,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/tileView': {
-      id: '/tileView'
-      path: '/tileView'
-      fullPath: '/tileView'
-      preLoaderRoute: typeof TileViewImport
+    '/credits': {
+      id: '/credits'
+      path: '/credits'
+      fullPath: '/credits'
+      preLoaderRoute: typeof CreditsImport
       parentRoute: typeof rootRoute
     }
     '/photoDetails/$date': {
@@ -67,41 +67,41 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/tileView': typeof TileViewRoute
+  '/credits': typeof CreditsRoute
   '/photoDetails/$date': typeof PhotoDetailsDateRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/tileView': typeof TileViewRoute
+  '/credits': typeof CreditsRoute
   '/photoDetails/$date': typeof PhotoDetailsDateRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/tileView': typeof TileViewRoute
+  '/credits': typeof CreditsRoute
   '/photoDetails/$date': typeof PhotoDetailsDateRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/tileView' | '/photoDetails/$date'
+  fullPaths: '/' | '/credits' | '/photoDetails/$date'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tileView' | '/photoDetails/$date'
-  id: '__root__' | '/' | '/tileView' | '/photoDetails/$date'
+  to: '/' | '/credits' | '/photoDetails/$date'
+  id: '__root__' | '/' | '/credits' | '/photoDetails/$date'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  TileViewRoute: typeof TileViewRoute
+  CreditsRoute: typeof CreditsRoute
   PhotoDetailsDateRoute: typeof PhotoDetailsDateRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  TileViewRoute: TileViewRoute,
+  CreditsRoute: CreditsRoute,
   PhotoDetailsDateRoute: PhotoDetailsDateRoute,
 }
 
@@ -116,15 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/tileView",
+        "/credits",
         "/photoDetails/$date"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/tileView": {
-      "filePath": "tileView.tsx"
+    "/credits": {
+      "filePath": "credits.tsx"
     },
     "/photoDetails/$date": {
       "filePath": "photoDetails.$date.tsx"
