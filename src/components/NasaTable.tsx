@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-
-const API_KEY = "MetHYfQ8KJ7rodhMY82Kd320QG7mmer4L8Q5L0xC";
+import { API_KEY } from "../types";
 
 function NasaTable() {
 	const { isLoading, error, data } = useQuery({
@@ -20,33 +17,47 @@ function NasaTable() {
 				<tr>
 					<th className="px-4 py-2">Date</th>
 					<th className="px-4 py-2">Image Title</th>
-					<th className="px-4 py-2">Action</th>
+					<th className="px-4 py-2">Preview</th>
+					<th className="px-4 py-2">Media Type</th>
 				</tr>
 			</thead>
 			<tbody>
-				{data.map((item: { date: string; title: string; url: string }) => (
-					<tr className="hover-row group" key={item.date}>
-						<td className="border px-4 py-2">{item.date}</td>
-						<td className="border-x-0 px-4 py-2">{item.title}</td>
-						<td className="border px-4 py-2">
-							<div className="flex-center">
-								<span>
-									<Link
-										to="/photoDetails/$date"
-										params={{ date: item.date }}
-										className="table-link"
-									>
-										<img
-											src={item.url}
-											alt={item.title}
-											className="thumb-image"
-										/>
-									</Link>
-								</span>
-							</div>
-						</td>
-					</tr>
-				))}
+				{data.map(
+					(item: {
+						date: string;
+						title: string;
+						url: string;
+						thumbnail_url: string;
+						media_type: string;
+					}) => (
+						<tr className="hover-row group" key={item.date}>
+							<td className="border px-4 py-2">{item.date}</td>
+							<td className="border-x-0 px-4 py-2">{item.title}</td>
+							<td className="border px-4 py-2">
+								<div className="flex-center">
+									<span>
+										<Link
+											to="/photoDetails/$date"
+											params={{ date: item.date }}
+											className="table-link"
+										>
+											<img
+												src={
+													item.media_type === "image"
+														? item.url
+														: item.thumbnail_url
+												}
+												alt={item.title}
+												className="thumb-image"
+											/>
+										</Link>
+									</span>
+								</div>
+							</td>
+							<td className="border px-4 py-2">{item.media_type}</td>
+						</tr>
+					),
+				)}
 			</tbody>
 		</table>
 	);

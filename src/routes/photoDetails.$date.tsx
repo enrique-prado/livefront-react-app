@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import ImageCard from '../components/ImageCard'
+import { API_KEY } from "../types";
 
-const API_KEY = 'MetHYfQ8KJ7rodhMY82Kd320QG7mmer4L8Q5L0xC'
 
 
 async function fetchImageDetails(date: string) {

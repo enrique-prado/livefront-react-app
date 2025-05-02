@@ -7,9 +7,8 @@ function ImageCard({ imageData }: { imageData: ImageData }) {
       <div className="flex-container">
 
           {/* Image Section */}
-
             <img 
-              src={imageData.url} 
+              src={imageData.media_type ==='image' ? imageData.url : imageData.thumbnail_url} 
               alt={imageData.title}
               className="big-image rounded-lg shadow-lg"
             />

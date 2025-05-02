@@ -7,5 +7,7 @@ export interface ImageData {
     service_version: string;
     title: string;
     url: string;
-    tumbnail_url: string;
+    thumbnail_url: string;
 }
+
+export const API_KEY = "MetHYfQ8KJ7rodhMY82Kd320QG7mmer4L8Q5L0xC";
