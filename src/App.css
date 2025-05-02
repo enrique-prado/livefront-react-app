@@ -54,6 +54,10 @@
   border-collapse: collapse;
 }
 
+.hover-row:hover {
+  background-color: #f0f0f0; /* Light gray background */
+}
+
 .flex-container {
   display: flex;
   flex-direction: column;

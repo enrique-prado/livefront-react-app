@@ -7,4 +7,5 @@ export interface ImageData {
     service_version: string;
     title: string;
     url: string;
+    tumbnail_url: string;
 }

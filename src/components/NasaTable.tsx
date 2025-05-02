@@ -23,7 +23,7 @@ function NasaTable() {
       </thead>
       <tbody>
         {data.map((item: { date: string; title: string; url: string }) => (
-          <tr key={item.url}>
+          <tr className='hover-row' key={item.date}>
             <td className='border px-4 py-2'>{item.date}</td>
             <td className='border-x-0 px-4 py-2'>{item.title}</td>
             <td className="border px-4">
@@ -43,7 +43,7 @@ function NasaTable() {
 }
 
 async function fetchImagesData() {
-  const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=30`)
+  const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=30&thumbs=true`)
   if (!response.ok) {
     throw new Error('Network response was not ok')
   }
