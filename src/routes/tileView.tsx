@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/neo')({
+export const Route = createFileRoute('/tileView')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  return <div>Hello "/neo"!</div>
+  return <div>Hello "/tileView"!</div>
 }

@@ -11,22 +11,15 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as NeoImport } from './routes/neo'
-import { Route as DetailsImport } from './routes/$details'
+import { Route as TileViewImport } from './routes/tileView'
 import { Route as IndexImport } from './routes/index'
 import { Route as PhotoDetailsDateImport } from './routes/photoDetails.$date'
 
 // Create/Update Routes
 
-const NeoRoute = NeoImport.update({
-  id: '/neo',
-  path: '/neo',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DetailsRoute = DetailsImport.update({
-  id: '/$details',
-  path: '/$details',
+const TileViewRoute = TileViewImport.update({
+  id: '/tileView',
+  path: '/tileView',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,18 +46,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/$details': {
-      id: '/$details'
-      path: '/$details'
-      fullPath: '/$details'
-      preLoaderRoute: typeof DetailsImport
-      parentRoute: typeof rootRoute
-    }
-    '/neo': {
-      id: '/neo'
-      path: '/neo'
-      fullPath: '/neo'
-      preLoaderRoute: typeof NeoImport
+    '/tileView': {
+      id: '/tileView'
+      path: '/tileView'
+      fullPath: '/tileView'
+      preLoaderRoute: typeof TileViewImport
       parentRoute: typeof rootRoute
     }
     '/photoDetails/$date': {
@@ -81,46 +67,41 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$details': typeof DetailsRoute
-  '/neo': typeof NeoRoute
+  '/tileView': typeof TileViewRoute
   '/photoDetails/$date': typeof PhotoDetailsDateRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/$details': typeof DetailsRoute
-  '/neo': typeof NeoRoute
+  '/tileView': typeof TileViewRoute
   '/photoDetails/$date': typeof PhotoDetailsDateRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/$details': typeof DetailsRoute
-  '/neo': typeof NeoRoute
+  '/tileView': typeof TileViewRoute
   '/photoDetails/$date': typeof PhotoDetailsDateRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$details' | '/neo' | '/photoDetails/$date'
+  fullPaths: '/' | '/tileView' | '/photoDetails/$date'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$details' | '/neo' | '/photoDetails/$date'
-  id: '__root__' | '/' | '/$details' | '/neo' | '/photoDetails/$date'
+  to: '/' | '/tileView' | '/photoDetails/$date'
+  id: '__root__' | '/' | '/tileView' | '/photoDetails/$date'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DetailsRoute: typeof DetailsRoute
-  NeoRoute: typeof NeoRoute
+  TileViewRoute: typeof TileViewRoute
   PhotoDetailsDateRoute: typeof PhotoDetailsDateRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DetailsRoute: DetailsRoute,
-  NeoRoute: NeoRoute,
+  TileViewRoute: TileViewRoute,
   PhotoDetailsDateRoute: PhotoDetailsDateRoute,
 }
 
@@ -135,19 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/$details",
-        "/neo",
+        "/tileView",
         "/photoDetails/$date"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/$details": {
-      "filePath": "$details.tsx"
-    },
-    "/neo": {
-      "filePath": "neo.tsx"
+    "/tileView": {
+      "filePath": "tileView.tsx"
     },
     "/photoDetails/$date": {
       "filePath": "photoDetails.$date.tsx"
