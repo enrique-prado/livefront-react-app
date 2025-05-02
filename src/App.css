@@ -62,8 +62,20 @@
   visibility: hidden;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .group:hover .group-hover\:visible {
   visibility: visible;
+}
+
+.thumb-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .flex-container {

@@ -16,7 +16,7 @@ async function fetchImageDetails(date: string) {
       throw new Error('Date is required')
     }
 
-  const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${date}`)
+  const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${date}&thumbs=true`)
   if (!response.ok) {
     throw new Error('A Network error occurred while fetching image details')
   }
