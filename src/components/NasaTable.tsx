@@ -13,19 +13,19 @@ function NasaTable() {
   if (error instanceof Error) return <p>Error: {error.message}</p>
 
   return (
-    <table>
+    <table className='table-nasa'>
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Image Title</th>
-          <th className="border px-4">Action</th>
+          <th className='px-4 py-2'>Date</th>
+          <th className='px-4 py-2'>Image Title</th>
+          <th className='px-4 py-2'>Action</th>
         </tr>
       </thead>
       <tbody>
         {data.map((item: { date: string; title: string; url: string }) => (
           <tr key={item.url}>
-            <td>{item.date}</td>
-            <td>{item.title}</td>
+            <td className='border px-4 py-2'>{item.date}</td>
+            <td className='border-x-0 px-4 py-2'>{item.title}</td>
             <td className="border px-4">
 							<div className="relative">
 								<span className="invisible group-hover:visible">
