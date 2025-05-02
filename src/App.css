@@ -58,6 +58,14 @@
   background-color: #f0f0f0; /* Light gray background */
 }
 
+.invisible {
+  visibility: hidden;
+}
+
+.group:hover .group-hover\:visible {
+  visibility: visible;
+}
+
 .flex-container {
   display: flex;
   flex-direction: column;
