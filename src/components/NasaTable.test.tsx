@@ -8,36 +8,29 @@ vi.mock('@tanstack/react-router', () => ({
   Link: ({ children }: { children: React.ReactNode }) => <div data-testid="mocked-link">{children}</div>
 }));
 
-// Import after the mock is set up
 import NasaTable from './NasaTable';
 
 describe('NasaTable Component', () => {
-  // Create a new QueryClient for each test
   let queryClient: QueryClient;
-  let originalFetch: typeof global.fetch;
+  let originalFetch: typeof window.fetch;
   
   beforeEach(() => {
     // Save the original fetch
-    originalFetch = global.fetch;
+    originalFetch = window.fetch;
     
-    // Reset mocks and create fresh clients before each test
     vi.resetAllMocks();
     
     queryClient = new QueryClient({
       defaultOptions: {
         queries: {
-          // Turn off retries to make testing easier
-          retry: false,
-          // Don't cache responses between tests
-          cacheTime: 0
+          retry: false
         }
       }
     });
   });
   
   afterEach(() => {
-    // Restore the original fetch
-    global.fetch = originalFetch;
+    window.fetch = originalFetch;
   });
   it('renders without errors', () => {
     render(
@@ -68,7 +61,7 @@ describe('NasaTable Component', () => {
       ok: true,
       json: () => Promise.resolve(mockData)
     });
-    global.fetch = mockFetchSpy as any;
+    window.fetch = mockFetchSpy as typeof window.fetch;
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -76,7 +69,6 @@ describe('NasaTable Component', () => {
       </QueryClientProvider>
     );
 
-    // Wait for the data to load
     await waitFor(() => {
       expect(mockFetchSpy).toHaveBeenCalled();
       expect(screen.getByText('Comet C/2001 Q4 (NEAT)')).toBeInTheDocument();
