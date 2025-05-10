@@ -10,4 +10,5 @@ export interface ImageData {
     thumbnail_url: string;
 }
 
-export const API_KEY = "MetHYfQ8KJ7rodhMY82Kd320QG7mmer4L8Q5L0xC";
+// Use the API key from environment variables
+export const API_KEY = import.meta.env.VITE_NASA_API_KEY;
